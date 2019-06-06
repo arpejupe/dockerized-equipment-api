@@ -60,8 +60,10 @@ typings/
 # dotenv environment variables file
 .env
 
+# sqlite database
+db/database.sqlite
+
+.vscode/
 
 # End of https://www.gitignore.io/api/node
 
-# sqlite database
-db/database.sqlite

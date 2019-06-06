@@ -1,0 +1,23 @@
+version: '3.3'
+services:
+  dockerized-equipment-api:
+    container_name: dockerized-equipment-api
+    build: .
+    ports:
+      - 3000:3000
+    volumes:
+      - .:/usr/src/app
+    env_file:
+      - .env
+    entrypoint: ["sh", "-c"]
+    command: [
+      "cp /tmp/yarn.lock yarn.lock & if [ '(tar -cf - /usr/local/share/.cache/yarn/v1 | crc32)' != '(tar -cf - .yarn_cache | crc32)' ]; then cp -r /usr/local/share/.cache/yarn/v1/. .yarn_cache/; fi & yarn start-debug"
+    ]
+    depends_on:
+      - dockerized-equipment-db
+  dockerized-equipment-db:
+    container_name: dockerized-equipment-db
+    image: postgres
+    restart: always
+    env_file:
+      - .env

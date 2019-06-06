@@ -1,29 +1,11 @@
-const development = {
-  database: 'databasename',
-  username: 'username',
-  password: 'password',
-  host: 'localhost',
-  dialect: 'sqlite' || 'mysql' || 'postgres',
-};
-
-const testing = {
-  database: 'databasename',
-  username: 'username',
-  password: 'password',
-  host: 'localhost',
-  dialect: 'sqlite' || 'mysql' || 'postgres',
-};
-
-const production = {
+const settings = {
   database: process.env.DB_NAME,
   username: process.env.DB_USER,
   password: process.env.DB_PASS,
   host: process.env.DB_HOST || 'localhost',
-  dialect: 'sqlite' || 'mysql' || 'postgres',
+  dialect: process.env.DB_DIALECT || 'sqlite' || 'mysql' || 'postgres',
 };
 
 module.exports = {
-  development,
-  testing,
-  production,
+  settings,
 };
