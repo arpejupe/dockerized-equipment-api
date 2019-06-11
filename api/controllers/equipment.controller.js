@@ -18,11 +18,16 @@ const EquipmentController = () => {
   const read = async (req, res) => {
     const { params } = req;
     try {
+      if (params.id && typeof params.id !== 'number') {
+        console.log('ERROR', params.id);
+        return res.status(500).json({ msg: 'Error: Invalid ID' });
+      }
       const equipment = await Equipment.findAll({
         where: {
           id: params.id,
         },
       });
+      console.log('NO ERROR');
       return res.status(200).json({ equipment });
     } catch (err) {
       console.log(err);
